@@ -1,0 +1,120 @@
+<html>
+<head>
+<title>snake.js</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #e0957b;}
+.s1 { color: #c9c9d1;}
+.s2 { color: #c9c9d1;}
+.s3 { color: #e0957b; font-weight: bold;}
+.s4 { color: #4dacf0;}
+.s5 { color: #62a362;}
+</style>
+</head>
+<body bgcolor="#1d1d26">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+snake.js</font>
+</center></td></tr></table>
+<pre><span class="s0">class </span><span class="s1">snake{</span>
+    <span class="s1">constructor(game) {</span>
+        <span class="s0">this</span><span class="s1">.game </span><span class="s2">= </span><span class="s1">game</span><span class="s3">;</span>
+        <span class="s0">this</span><span class="s1">.x </span><span class="s2">= </span><span class="s4">0</span><span class="s3">;</span>
+        <span class="s0">this</span><span class="s1">.y </span><span class="s2">= </span><span class="s4">0</span><span class="s3">;</span>
+        <span class="s0">this</span><span class="s1">.grid </span><span class="s2">= </span><span class="s4">20</span><span class="s3">;</span>
+        <span class="s0">this</span><span class="s1">.dx </span><span class="s2">= </span><span class="s0">this</span><span class="s1">.grid</span><span class="s3">;</span>
+        <span class="s0">this</span><span class="s1">.dy </span><span class="s2">= </span><span class="s4">0</span><span class="s3">;</span>
+        <span class="s0">this</span><span class="s1">.cell </span><span class="s2">= </span><span class="s1">[]</span><span class="s3">;</span>
+        <span class="s0">this</span><span class="s1">.maxCells </span><span class="s2">= </span><span class="s4">2</span><span class="s3">;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">update() {</span>
+        <span class="s0">if</span><span class="s1">(</span><span class="s0">this</span><span class="s1">.endGame()){</span>
+            <span class="s0">this</span><span class="s1">.x </span><span class="s2">+= </span><span class="s0">this</span><span class="s1">.dx</span><span class="s3">;</span>
+            <span class="s0">this</span><span class="s1">.y </span><span class="s2">+= </span><span class="s0">this</span><span class="s1">.dy</span><span class="s3">;</span>
+        <span class="s1">}</span>
+
+        <span class="s0">if</span><span class="s1">(</span><span class="s0">this</span><span class="s1">.x </span><span class="s2">&gt;= </span><span class="s0">this</span><span class="s1">.game.canvas.width){</span>
+            <span class="s0">this</span><span class="s1">.x </span><span class="s2">= </span><span class="s4">0</span><span class="s3">;</span>
+        <span class="s1">}</span>
+
+        <span class="s0">else if</span><span class="s1">(</span><span class="s0">this</span><span class="s1">.x </span><span class="s2">&lt; </span><span class="s4">0</span><span class="s1">){</span>
+            <span class="s0">this</span><span class="s1">.x </span><span class="s2">= </span><span class="s0">this</span><span class="s1">.game.canvas.width</span><span class="s3">;</span>
+        <span class="s1">}</span>
+
+        <span class="s0">if</span><span class="s1">(</span><span class="s0">this</span><span class="s1">.y </span><span class="s2">&gt;= </span><span class="s0">this</span><span class="s1">.game.canvas.height){</span>
+            <span class="s0">this</span><span class="s1">.y </span><span class="s2">= </span><span class="s4">0</span><span class="s3">;</span>
+        <span class="s1">}</span>
+
+        <span class="s0">else if</span><span class="s1">(</span><span class="s0">this</span><span class="s1">.y </span><span class="s2">&lt; </span><span class="s4">0</span><span class="s1">){</span>
+            <span class="s0">this</span><span class="s1">.y </span><span class="s2">= </span><span class="s0">this</span><span class="s1">.game.canvas.height</span><span class="s3">;</span>
+        <span class="s1">}</span>
+
+        <span class="s0">this</span><span class="s1">.cell.unshift({x</span><span class="s2">: </span><span class="s0">this</span><span class="s1">.x</span><span class="s3">, </span><span class="s1">y</span><span class="s2">: </span><span class="s0">this</span><span class="s1">.y})</span><span class="s3">;</span>
+        <span class="s0">if</span><span class="s1">(</span><span class="s0">this</span><span class="s1">.cell.length </span><span class="s2">&gt; </span><span class="s0">this</span><span class="s1">.maxCells){</span>
+            <span class="s0">this</span><span class="s1">.cell.pop()</span><span class="s3">;</span>
+        <span class="s1">}</span>
+        <span class="s0">this</span><span class="s1">.catchHandle()</span><span class="s3">;</span>
+        <span class="s1">console.log(</span><span class="s0">this</span><span class="s1">.cell)</span><span class="s3">;</span>
+
+    <span class="s1">}</span>
+
+    <span class="s1">draw() {</span>
+        <span class="s0">for</span><span class="s1">(</span><span class="s0">let </span><span class="s1">i </span><span class="s2">= </span><span class="s4">0</span><span class="s3">; </span><span class="s1">i </span><span class="s2">&lt; </span><span class="s0">this</span><span class="s1">.cell.length</span><span class="s3">; </span><span class="s1">i</span><span class="s2">++</span><span class="s1">){</span>
+            <span class="s0">this</span><span class="s1">.game.context.fillStyle </span><span class="s2">= </span><span class="s5">'black'</span><span class="s3">;</span>
+            <span class="s0">this</span><span class="s1">.game.context.fillRect(</span><span class="s0">this</span><span class="s1">.cell[i].x</span><span class="s3">, </span><span class="s0">this</span><span class="s1">.cell[i].y</span><span class="s3">, </span><span class="s0">this</span><span class="s1">.grid</span><span class="s3">, </span><span class="s0">this</span><span class="s1">.grid)</span><span class="s3">;</span>
+        <span class="s1">}</span>
+
+        <span class="s0">if</span><span class="s1">(</span><span class="s2">!</span><span class="s0">this</span><span class="s1">.endGame()) {</span>
+            <span class="s0">this</span><span class="s1">.game.context.font </span><span class="s2">= </span><span class="s5">'30px red'</span><span class="s3">;</span>
+            <span class="s0">this</span><span class="s1">.game.context.fillText(</span><span class="s5">&quot;Thua rồi hihi&quot;</span><span class="s3">, </span><span class="s4">200</span><span class="s3">, </span><span class="s4">200</span><span class="s1">)</span><span class="s3">;</span>
+            <span class="s1">document.getElementById(</span><span class="s5">&quot;over&quot;</span><span class="s1">)</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s1">catchHandle() {</span>
+        <span class="s1">document.addEventListener(</span><span class="s5">'keydown'</span><span class="s3">, </span><span class="s1">(e) </span><span class="s2">=&gt; </span><span class="s1">{</span>
+            <span class="s0">if</span><span class="s1">(e.which </span><span class="s2">== </span><span class="s4">37 </span><span class="s2">&amp;&amp; </span><span class="s0">this</span><span class="s1">.dx </span><span class="s2">== </span><span class="s4">0</span><span class="s1">){</span>
+                <span class="s0">this</span><span class="s1">.dx </span><span class="s2">= -</span><span class="s0">this</span><span class="s1">.grid</span><span class="s3">;</span>
+                <span class="s0">this</span><span class="s1">.dy </span><span class="s2">= </span><span class="s4">0</span><span class="s3">;</span>
+            <span class="s1">}</span>
+
+            <span class="s0">else if</span><span class="s1">(e.which </span><span class="s2">== </span><span class="s4">38 </span><span class="s2">&amp;&amp; </span><span class="s0">this</span><span class="s1">.dy </span><span class="s2">== </span><span class="s4">0</span><span class="s1">){</span>
+                <span class="s0">this</span><span class="s1">.dx </span><span class="s2">= </span><span class="s4">0</span><span class="s3">;</span>
+                <span class="s0">this</span><span class="s1">.dy </span><span class="s2">= -</span><span class="s0">this</span><span class="s1">.grid</span><span class="s3">;</span>
+            <span class="s1">}</span>
+
+            <span class="s0">else if</span><span class="s1">(e.which </span><span class="s2">== </span><span class="s4">39 </span><span class="s2">&amp;&amp; </span><span class="s0">this</span><span class="s1">.dx </span><span class="s2">== </span><span class="s4">0</span><span class="s1">){</span>
+                <span class="s0">this</span><span class="s1">.dx </span><span class="s2">= </span><span class="s0">this</span><span class="s1">.grid</span><span class="s3">;</span>
+                <span class="s0">this</span><span class="s1">.dy </span><span class="s2">= </span><span class="s4">0</span><span class="s3">;</span>
+            <span class="s1">}</span>
+
+            <span class="s0">else if</span><span class="s1">(e.which </span><span class="s2">== </span><span class="s4">40 </span><span class="s2">&amp;&amp; </span><span class="s0">this</span><span class="s1">.dy </span><span class="s2">== </span><span class="s4">0</span><span class="s1">){</span>
+                <span class="s0">this</span><span class="s1">.dx </span><span class="s2">= </span><span class="s4">0</span><span class="s3">;</span>
+                <span class="s0">this</span><span class="s1">.dy </span><span class="s2">= </span><span class="s0">this</span><span class="s1">.grid</span><span class="s3">;</span>
+            <span class="s1">}</span>
+        <span class="s1">})</span><span class="s3">;</span>
+    <span class="s1">}</span>
+    <span class="s1">eat(x</span><span class="s3">,</span><span class="s1">y) {</span>
+        <span class="s0">if</span><span class="s1">(</span><span class="s0">this</span><span class="s1">.x </span><span class="s2">== </span><span class="s1">x </span><span class="s2">&amp;&amp; </span><span class="s0">this</span><span class="s1">.y </span><span class="s2">== </span><span class="s1">y){</span>
+            <span class="s0">this</span><span class="s1">.maxCells</span><span class="s2">++</span><span class="s3">;</span>
+            <span class="s1">count</span><span class="s2">++</span>
+            <span class="s1">document.getElementById(</span><span class="s5">&quot;diem&quot;</span><span class="s1">).innerText </span><span class="s2">= </span><span class="s1">count</span>
+            <span class="s0">return true</span><span class="s3">;</span>
+        <span class="s1">}</span>
+        <span class="s0">return false</span><span class="s3">;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">endGame(){</span>
+        <span class="s0">for</span><span class="s1">(</span><span class="s0">let </span><span class="s1">i </span><span class="s2">= </span><span class="s4">1</span><span class="s3">; </span><span class="s1">i </span><span class="s2">&lt; </span><span class="s0">this</span><span class="s1">.cell.length</span><span class="s3">; </span><span class="s1">i</span><span class="s2">++</span><span class="s1">){</span>
+            <span class="s0">if</span><span class="s1">(</span><span class="s0">this</span><span class="s1">.x </span><span class="s2">== </span><span class="s0">this</span><span class="s1">.cell[i].x </span><span class="s2">&amp;&amp; </span><span class="s0">this</span><span class="s1">.y </span><span class="s2">== </span><span class="s0">this</span><span class="s1">.cell[i].y){</span>
+                <span class="s0">return false</span><span class="s3">;</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+        <span class="s0">return true</span><span class="s3">;</span>
+    <span class="s1">}</span>
+<span class="s1">}</span>
+<span class="s0">let </span><span class="s1">count </span><span class="s2">= </span><span class="s4">0</span></pre>
+</body>
+</html>
