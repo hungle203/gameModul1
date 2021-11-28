@@ -6,14 +6,22 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div>
-        <h1 id="text"> Rắn Săn mồi vui vẻ <h1>Điểm:</h1></h1>
-        <h1 id="diem">0</h1>
-</div>
-<img id="img" src="pngwing.com.png" height="500" width="300"/>
+<audio id="musis" autoplay loop>
+    <source src="y2meta.com%20-%20%5Bno%20copyright%20music%5D%20'Here%20And%20There'%20lofi%20background%20music%20(128%20kbps).mp1" type="audio/mpeg">
+</audio>
+        <h2 id="text">Điểm</h2>
+        <h2 id="count">0</h2>
+<!--<canvas id="myCanVas" width="300" height="500"></canvas>-->
+<img align="right" src="dance.gif" height="500" width="400"/>
 </body>
-<img id="over" src="gameover.png" style="display: none">
 <script src="snake.js"></script>
 <script src="food.js"></script>
 <script src="game.js"></script>
+<script>
+    window.addEventListener('keydown',musicPlay);
+    function musicPlay() {
+        document.getElementById('musis').play();
+        window.removeEventListener('keydown',musicPlay);
+    }
+</script>
 </html>

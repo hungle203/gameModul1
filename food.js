@@ -6,16 +6,13 @@ class food{
         this.grid = 20;
         this.update();
     }
-
-
-
     update() {
-        this.x = (Math.floor(Math.random()* (19 - 0)) + 0)*this.grid;
-        this.y = (Math.floor(Math.random()* (19 - 0)) + 0)*this.grid;
+        this.x = (Math.floor(Math.random()* (50 - 0)) )*this.grid;
+        this.y = (Math.floor(Math.random()* (19 - 0)) )*this.grid;
     }
 
     draw() {
-        this.game.context.fillStyle = 'green';
+        this.game.context.fillStyle = 'red';
         this.game.context.fillRect(this.x, this.y, this.grid, this.grid);
     }
 }
