@@ -17,7 +17,7 @@ class game{
     loop() {
         this.update();
         this.draw();
-        setTimeout(() => this.loop(), 60);
+        setTimeout(() => this.loop(), 90);
     }
     update() {
         this.snake.update();

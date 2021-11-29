@@ -4,10 +4,4 @@ body {
 canvas {
     border: 1px solid black;
   background:url(w.jpg)
-
 }
-#text {
-    /*text-align: center;*/
-    color: red
-}
-
