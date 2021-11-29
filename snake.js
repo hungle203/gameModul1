@@ -43,13 +43,13 @@ class snake{
           if(this.count <= 10) {
               alert("Gà quá bạn eey!! được có " + this.count + " Điểm")
           }
-          if (this.count > 10 && count < 100) {
+          if (this.count > 10 && this.count < 100) {
               alert("Vẫn gà lắm bạn ây được có " + this.count + " Điểm")
-          }
+          }return false
           if (this.count >= 100) {
               alert("Cay lắm mới được " + this.count + " Điểm!!")
           }
-        }
+        }return false
     }
     catchHandle() {
         document.addEventListener('keydown', (e) => {
