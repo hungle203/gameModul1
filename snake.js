@@ -8,6 +8,7 @@ class snake{
         this.dy = 0;
         this.cell = [];
         this.maxCells = 2;
+        this.count = 0;
     }
     update() {
         if(this.endGame()){
@@ -39,11 +40,14 @@ class snake{
         }
         if(!this.endGame()) {
             location.reload();
-          if(count <= 10) {
-              alert("Gà quá bạn eey!! được có" + count + "Điểm")
+          if(this.count <= 10) {
+              alert("Gà quá bạn eey!! được có " + this.count + " Điểm")
           }
-          if (count >= 100 ) {
-              alert("Cay lắm mới được" + count + "Điểm")
+          if (this.count > 10 && count < 100) {
+              alert("Vẫn gà lắm bạn ây được có " + this.count + " Điểm")
+          }
+          if (this.count >= 100) {
+              alert("Cay lắm mới được " + this.count + " Điểm!!")
           }
         }
     }
@@ -70,10 +74,8 @@ class snake{
     eat(x,y) {
         if(this.x == x && this.y == y){
             this.maxCells++;
-            count++
-
-            document.getElementById("count").innerText =  count
-            // document.getElementById("hightScore").innerText = HightsSores
+            this.count++
+            document.getElementById("count").innerText =  this.count
             return true;
         }
         return false;
@@ -88,4 +90,4 @@ class snake{
         return true;
     }
 }
-let count = 0;
+// let count = 0;
